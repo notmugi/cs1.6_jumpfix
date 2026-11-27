@@ -1,6 +1,6 @@
 # CS 1.6 high-FPS landing fix (native Linux)
 
-An experimental client-side patch for **GoldSrc build 10211, Linux i386**. Keep rendering at your chosen FPS while combining movement input into roughly 100 commands/second. The default build also interpolates local camera **position**, not mouse angles. This is an engine patch, not a csldr plugin or a ReGameDLL install. No Valve binaries are distributed.
+An experimental client-side patch for **GoldSrc build 10211, Linux i386**. Keep rendering at your chosen FPS while combining movement input into roughly 100 commands/second. The default build also interpolates local camera **position**, not mouse angles. No Valve binaries are distributed.
 
 ## Build and check
 
