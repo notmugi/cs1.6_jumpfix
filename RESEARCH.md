@@ -22,9 +22,11 @@ Target inspected: native Steam Linux CS 1.6, protocol 48, `1.1.2.7/Stdio`, Oct 8
 | `verify.c` | Executes the staged x86 movement stub with stand-ins for engine continuations: 240 samples, 100 commands, one-frame tap retained. Smooth variant also exercises camera subframes, position restoration, teleport and pause. No live process attachment. |
 | Playtest | Player reported the landing issue appeared fixed with movement-only, but translation visibly stepped. That motivated the smooth build. No controlled in-game measurements or user verdict on the smooth build recorded here. |
 
+`local_alive` is shared by both hooks. It checks the current parsed local snapshot (`cl.frames[cl.parsecountmod].clientdata`) for `iuser1 == OBS_NONE`, `deadflag == DEAD_NO`, and positive health; an invalid frame or missing valid sequence disables the patch. ReGameDLL `UpdateClientData` preserves the observer’s `iuser1` even when substituting the target’s health in eye mode. The harness covers a healthy target, death, invalid frame and resuming without accumulated inputs or stale camera position. Still to verify in game: death → in-eye → chase → respawn.
+
 Reference output SHA-256 (GCC 16.2.1, original development machine; toolchain changes may change these):
 
-- Movement only: `2a90cc7e8e9033124acfb6215c33701fb2e93157dd2a806223f044cc149e3c9c`
-- Movement + smooth view: `f43c820bf6361aa8a1a29f58960e174d9996de0387eb806be07d6311a6c8cc7b`
+- Movement only: `59a5ef959e55b66a12e5418b6e985eb7f8150680d3098b3486407ad0925ad03f`
+- Movement + smooth view: `199f997887ca039244399f7aacb545c8a721fb100fa60306be1fac972168728d`
 
 Next useful comparison: same local map, same FPS and `cl_cmdrate`, stock vs movement-only vs smooth. Compare horizontal speed recovery after identical running jumps. Strafe past a wall and turn the mouse while stationary to distinguish positional cadence from look response. Check FPS fluctuating across 100, quick jump/fire and weapon switches, stairs, prediction corrections, map transitions, voice and demo playback. The current harness does not exercise these live paths. Do not assume secured-server compatibility from a local pass.
