@@ -15,4 +15,14 @@ int main(void){
  State s={0}; Cmd c={0}; c.impulse=9; assert(sample(&s,&c,4,0,0,1)==-1);
  c.impulse=0; assert(sample(&s,&c,6,0,.006,1)==10 && c.impulse==9);
  assert(sample(&s,&c,43,1,.049,1)==43); assert(sample(&s,&c,3,2,.052,0)==3);
+#ifndef MOVEMENT_ONLY
+ /* Last grounded duck step: origin drops 18, eye offset rises 18.
+    World eye Z is continuous at every render phase, in either hull. */
+ for(int phase=0;phase<10;phase++){
+    Camera cam={0}; Ref r={.dt=.004f,.entity=1,.health=100};
+    r.pos[2]=36; r.viewheight[2]=-6; blend(&cam,&r,1,0,0);
+    r.pos[2]=18; r.viewheight[2]=12; blend(&cam,&r,2,.01,phase);
+    assert(r.pos[2]+r.viewheight[2]==30 && r.viewheight[2]==12);
+ }
+#endif
 }

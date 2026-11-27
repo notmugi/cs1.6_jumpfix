@@ -27,6 +27,6 @@ Target inspected: native Steam Linux CS 1.6, protocol 48, `1.1.2.7/Stdio`, Oct 8
 Reference output SHA-256 (GCC 16.2.1, original development machine; toolchain changes may change these):
 
 - Movement only: `59a5ef959e55b66a12e5418b6e985eb7f8150680d3098b3486407ad0925ad03f`
-- Movement + smooth view: `199f997887ca039244399f7aacb545c8a721fb100fa60306be1fac972168728d`
+- Movement + smooth view: `51e451b7739426426f0efca987cd2b107a55d19b7182b9b894a252b3b86a702d`
 
 Next useful comparison: same local map, same FPS and `cl_cmdrate`, stock vs movement-only vs smooth. Compare horizontal speed recovery after identical running jumps. Strafe past a wall and turn the mouse while stationary to distinguish positional cadence from look response. Check FPS fluctuating across 100, quick jump/fire and weapon switches, stairs, prediction corrections, map transitions, voice and demo playback. The current harness does not exercise these live paths. Do not assume secured-server compatibility from a local pass.
